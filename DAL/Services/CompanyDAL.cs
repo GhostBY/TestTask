@@ -61,7 +61,17 @@ namespace DAL.Services
 
         public void Update(Company item)
         {
-            throw new NotImplementedException();
+            string query = "UPDATE Companies SET Name = @Name, Size = @Size, OrganizationalForm = @OrganizationalForm WHERE Id = @Id; ";
+            SqlParameter[] sqlParameters = new SqlParameter[4];
+            sqlParameters[0] = new SqlParameter("@Id", SqlDbType.Int);
+            sqlParameters[0].Value = Convert.ToInt16(item.Id);
+            sqlParameters[1] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlParameters[1].Value = Convert.ToString(item.Name);
+            sqlParameters[2] = new SqlParameter("@Size", SqlDbType.Int);
+            sqlParameters[2].Value = Convert.ToInt16(item.Size);
+            sqlParameters[3] = new SqlParameter("@OrganizationalForm", SqlDbType.NVarChar);
+            sqlParameters[3].Value = Convert.ToString(item.OrganizationalForm);
+            Connection.ExecuteUpdateQuery(query, sqlParameters);
         }
 
         public void Delete(int id)

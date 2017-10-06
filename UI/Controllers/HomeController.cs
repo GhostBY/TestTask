@@ -77,5 +77,24 @@ namespace UI.Controllers
             
             return View(company);
         }
+        [HttpPost]
+        public ActionResult CompanyEdit(CompanyViewModel item)
+        {
+            if (ModelState.IsValid)
+            {
+                CompanyDTO companyDTO = new CompanyDTO();
+                companyDTO.Id = item.Id;
+                companyDTO.Name = item.Name;
+                companyDTO.Size = item.Size;
+                companyDTO.OrganizationalForm = item.OrganizationalForm;
+                companyService.UpdateCompany(companyDTO);
+                TempData["message"] = string.Format("Изменения  успешно сохранены");
+                return RedirectToAction("Companies");
+            }
+            else
+            {
+                return View(item);
+            }
+        }
     }
 }

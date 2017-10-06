@@ -46,5 +46,15 @@ namespace BLL.Services
             companyDTO.Size = company.Size;
             return companyDTO;
         }
+
+        public void UpdateCompany(CompanyDTO Company)
+        {
+            Company company = new Company();
+            company.Id = Company.Id;
+            company.Name = Company.Name;
+            company.OrganizationalForm = Company.OrganizationalForm;
+            company.Size = Company.Size;
+            companyDAL.Update(company);
+        }
     }
 }
