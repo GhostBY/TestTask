@@ -13,5 +13,7 @@ namespace BLL.Interfaces
         CompanyDTO GetCompanyById(int Id);
         void UpdateCompany(CompanyDTO Company);
         void CreateCompany(CompanyDTO Company);
+
+        void DeleteCompany(int Id);
     }
 }

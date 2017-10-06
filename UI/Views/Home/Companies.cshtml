@@ -42,15 +42,15 @@
                         <td class="text-center">@item.Size </td>
                         <td class="text-center">@item.OrganizationalForm</td>
                         
-                        @*<td class="text-center">
-                            @using (Html.BeginForm("DeleteAcc", "Admin"))
+                        <td class="text-center">
+                            @using (Html.BeginForm("DeleteCompany", "Home"))
                             {
-                                @Html.Hidden("AccumulatorID", item.AccumulatorID)
+                                @Html.Hidden("Id", item.Id)
                                 <input type="submit"
                                        class="btn btn-default btn-xs"
                                        value="Удалить" />
                             }
-                        </td>*@
+                        </td>
                     </tr>
                 }
             </table>

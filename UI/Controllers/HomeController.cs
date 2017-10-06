@@ -120,5 +120,22 @@ namespace UI.Controllers
                 return View(item);
             }
         }
+
+        public ActionResult DeleteCompany(int Id)
+        {
+            try
+            {
+                companyService.DeleteCompany(Id);
+                TempData["message"] = string.Format("Компания была успешно удалена");
+                return RedirectToAction("Companies");
+            }
+            catch
+            {
+                TempData["message"] = string.Format("Возникла ошибка при удалении компании");
+                return RedirectToAction("Companies");
+            }
+            
+            
+        }
     }
 }

@@ -30,6 +30,11 @@ namespace BLL.Services
             companyDAL.Create(company);
         }
 
+        public void DeleteCompany(int Id)
+        {
+            companyDAL.Delete(Id);
+        }
+
         public List<CompanyDTO> GetAllCompany()
         {
             List<Company> CompaniesDAL = new List<Company>();

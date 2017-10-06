@@ -95,5 +95,25 @@ namespace DAL
             }
             return true;
         }
+        public bool ExecuteDeleteQuery(string Query, SqlParameter[] Parameters)
+        {
+            SqlCommand myCommand = new SqlCommand();
+            try
+            {
+                myCommand.Connection = OpenConnection();
+                myCommand.CommandText = Query;
+                myCommand.Parameters.AddRange(Parameters);
+                Adapter.DeleteCommand = myCommand;
+                myCommand.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            {
+                return false;
+            }
+            finally
+            {
+            }
+            return true;
+        }
     }
 }
