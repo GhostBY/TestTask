@@ -11,14 +11,30 @@ namespace UI.Controllers
 {
     public class HomeController : Controller
     {
-        private ICompanyService companyService;
-        public HomeController(ICompanyService companyService)
+        CompanyService companyService ;
+        List<CompanyViewModel> CompaniesResult = new List<CompanyViewModel>();
+        public HomeController(CompanyService companyService)
         {
+           
             this.companyService = companyService;
         }
         public HomeController()
         {
-
+            if (companyService == null)
+            {
+                companyService = new CompanyService();
+                List<CompanyDTO> CompaniesDTO = new List<CompanyDTO>();
+                CompaniesDTO = companyService.GetAllCompany();
+                foreach (var company in CompaniesDTO)
+                {
+                    CompanyViewModel companyView = new CompanyViewModel();
+                    companyView.Id = company.Id;
+                    companyView.Name = company.Name;
+                    companyView.OrganizationalForm = company.OrganizationalForm;
+                    companyView.Size = company.Size;
+                    CompaniesResult.Add(companyView);
+                }
+            }
         }
         public ActionResult Index()
         {
@@ -40,21 +56,26 @@ namespace UI.Controllers
         }
         public ActionResult Companies()
         {
-            CompanyService companyService = new CompanyService();
+            //CompanyService companyService = new CompanyService();
             //List<CompanyDTO> CompaniesDTO = new companyService.GetAllCompany();
-            List<CompanyDTO> CompaniesDTO = companyService.GetAllCompany();
-            List<CompanyViewModel> Companies = new List<CompanyViewModel>();
-            foreach(var company in CompaniesDTO)
-            {
-                CompanyViewModel companyView = new CompanyViewModel();
-                companyView.Id = company.Id;
-                companyView.Name = company.Name;
-                companyView.OrganizationalForm = company.OrganizationalForm;
-                companyView.Size = company.Size;
-                Companies.Add(companyView);
-            }
+            
 
-            return View(Companies);
+            return View(CompaniesResult);
+        }
+        public ActionResult CompanyEdit(int Id)
+        {
+            CompanyViewModel company = new CompanyViewModel();
+          
+                CompanyDTO companyDTO = companyService.GetCompanyById(Id);
+                if(companyDTO!=null)
+                {
+                    company.Id = companyDTO.Id;
+                    company.Name = companyDTO.Name;
+                    company.Size= companyDTO.Size;
+                    company.OrganizationalForm = companyDTO.OrganizationalForm;
+                }
+            
+            return View(company);
         }
     }
 }

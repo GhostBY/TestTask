@@ -1,0 +1,54 @@
+﻿
+
+@model UI.Models.ViewModels.CompanyViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <title></title>
+</head>
+<body>
+    <div class="panel">
+        <div class="panel-heading">
+            <h3>Редактирование  аккумулятора </h3>
+        </div>
+
+        @using (Html.BeginForm("CompanyEdit", "Home"))
+        {
+            <div class="panel-body">
+                @Html.HiddenFor(m => m.Id)
+                @foreach (var property in ViewData.ModelMetadata.Properties)
+                {
+                    if (property.PropertyName != "Id")
+                    {
+                        <div class="form-group">
+                            <label>@(property.DisplayName ?? property.PropertyName)</label>
+                           
+                                @Html.TextBox(property.PropertyName, null,
+                                new { @class = "form-control" })
+                            
+                            @Html.ValidationMessage(property.PropertyName)
+                        </div>
+                    }
+                }
+            </div>
+            <div class="panel-footer">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                @Html.ActionLink("Отменить изменения и вернуться к списку", "Accumulators", null, new
+           {
+               @class = "btn btn-default"
+           })
+            </div>
+        }
+    </div>
+</body>
+</html>
+
+

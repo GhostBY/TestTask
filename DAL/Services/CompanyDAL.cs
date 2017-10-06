@@ -38,7 +38,20 @@ namespace DAL.Services
 
         public Company Get(int id)
         {
-            throw new NotImplementedException();
+            string query = "select * from [Companies] where Id = @Id";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@Id", SqlDbType.VarChar);
+            sqlParameters[0].Value = Convert.ToString(id);
+            DataTable data = Connection.ExecuteSelectQuery(query, sqlParameters);
+            Company company = new Company();
+            foreach (DataRow dr in data.Rows)
+            {
+                company.Id = Int32.Parse(dr["Id"].ToString());
+                company.Size = Int32.Parse(dr["Size"].ToString());
+                company.Name = dr["Name"].ToString();
+                company.OrganizationalForm = dr["OrganizationalForm"].ToString();
+            }
+            return company;
         }
 
         public void Create(Company item)

@@ -39,14 +39,14 @@
                     <th class="text-right">ID</th>
                     <th>Название</th>
                     <th class="text-right">Размер </th>
-                    <th class="text-right">Оргпнизационно-правовая форма</th>
+                    <th class="text-right">Организационно-правовая форма</th>
                 </tr>
                 @foreach (var item in Model)
             {
                     <tr>
                         <td class="text-right">@item.Id</td>
-                        @*<td>@Html.ActionLink(item.Name, "AccumulatorEdit", new { item.AccumulatorID })</td>*@
-                        <td class="text-right">@item.Name</td>
+                        <td>@Html.ActionLink(item.Name, "CompanyEdit", new { item.Id })</td>
+                        @*<td class="text-right">@item.Name</td>*@
                         <td class="text-right">@item.Size </td>
                         <td class="text-right">@item.OrganizationalForm</td>
                         

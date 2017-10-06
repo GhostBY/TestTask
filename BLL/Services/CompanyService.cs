@@ -34,5 +34,17 @@ namespace BLL.Services
             }
             return Companies;
         }
+
+        public CompanyDTO GetCompanyById(int Id)
+        {
+            Company company = new Company();
+            company =companyDAL.Get(Id);
+            CompanyDTO companyDTO = new CompanyDTO();
+            companyDTO.Id = company.Id;
+            companyDTO.Name = company.Name;
+            companyDTO.OrganizationalForm = company.OrganizationalForm;
+            companyDTO.Size = company.Size;
+            return companyDTO;
+        }
     }
 }

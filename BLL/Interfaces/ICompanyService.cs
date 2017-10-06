@@ -10,5 +10,6 @@ namespace BLL.Interfaces
     public interface ICompanyService
     {
         List<CompanyDTO> GetAllCompany();
+        CompanyDTO GetCompanyById(int Id);
     }
 }
