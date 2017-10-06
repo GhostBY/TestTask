@@ -19,6 +19,17 @@ namespace BLL.Services
             Companies = new List<CompanyDTO>();
             companyDAL = new CompanyDAL();
         }
+
+        public void CreateCompany(CompanyDTO Company)
+        {
+            Company company = new Company();
+            company.Id = Company.Id;
+            company.Name = Company.Name;
+            company.OrganizationalForm = Company.OrganizationalForm;
+            company.Size = Company.Size;
+            companyDAL.Create(company);
+        }
+
         public List<CompanyDTO> GetAllCompany()
         {
             List<Company> CompaniesDAL = new List<Company>();

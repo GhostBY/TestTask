@@ -12,5 +12,6 @@ namespace BLL.Interfaces
         List<CompanyDTO> GetAllCompany();
         CompanyDTO GetCompanyById(int Id);
         void UpdateCompany(CompanyDTO Company);
+        void CreateCompany(CompanyDTO Company);
     }
 }

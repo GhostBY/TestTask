@@ -56,7 +56,15 @@ namespace DAL.Services
 
         public void Create(Company item)
         {
-            throw new NotImplementedException();
+            string query = "INSERT INTO Companies (Name, Size, OrganizationalForm) VALUES(@Name, @Size, @OrganizationalForm); ";
+            SqlParameter[] sqlParameters = new SqlParameter[3];
+            sqlParameters[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlParameters[0].Value = Convert.ToString(item.Name);
+            sqlParameters[1] = new SqlParameter("@Size", SqlDbType.Int);
+            sqlParameters[1].Value = Convert.ToInt16(item.Size);
+            sqlParameters[2] = new SqlParameter("@OrganizationalForm", SqlDbType.NVarChar);
+            sqlParameters[2].Value = Convert.ToString(item.OrganizationalForm);
+            Connection.ExecuteInsertQuery(query, sqlParameters);
         }
 
         public void Update(Company item)

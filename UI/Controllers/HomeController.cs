@@ -96,5 +96,29 @@ namespace UI.Controllers
                 return View(item);
             }
         }
+
+        public ActionResult CompanyCreate()
+        {
+            return View(new CompanyViewModel());
+        }
+        [HttpPost]
+        public ActionResult CompanyCreate(CompanyViewModel item)
+        {
+            if (ModelState.IsValid)
+            {
+                CompanyDTO companyDTO = new CompanyDTO();
+                companyDTO.Id = item.Id;
+                companyDTO.Name = item.Name;
+                companyDTO.Size = item.Size;
+                companyDTO.OrganizationalForm = item.OrganizationalForm;
+                companyService.CreateCompany(companyDTO);
+                TempData["message"] = string.Format("Компания  успешно добавлена");
+                return RedirectToAction("Companies");
+            }
+            else
+            {
+                return View(item);
+            }
+        }
     }
 }

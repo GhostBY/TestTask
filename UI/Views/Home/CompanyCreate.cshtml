@@ -17,10 +17,10 @@
 <body>
     <div class="panel">
         <div class="panel-heading">
-            <h3>Редактирование  компании </h3>
+            <h3>Добавление компании</h3>
         </div>
 
-        @using (Html.BeginForm("CompanyEdit", "Home"))
+        @using (Html.BeginForm("CompanyCreate", "Home"))
         {
             <div class="panel-body">
                 @Html.HiddenFor(m => m.Id)
@@ -30,10 +30,10 @@
                     {
                         <div class="form-group">
                             <label>@(property.DisplayName ?? property.PropertyName)</label>
-                           
-                                @Html.TextBox(property.PropertyName, null,
+
+                            @Html.TextBox(property.PropertyName, null,
                                 new { @class = "form-control" })
-                            
+
                             @Html.ValidationMessage(property.PropertyName)
                         </div>
                     }
@@ -50,5 +50,7 @@
     </div>
 </body>
 </html>
+
+
 
 
