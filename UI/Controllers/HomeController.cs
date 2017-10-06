@@ -12,6 +12,8 @@ namespace UI.Controllers
     public class HomeController : Controller
     {
         CompanyService companyService ;
+        EmployeeService employeeService;
+        List<EmployeeViewModel> EmployeesResult = new List<EmployeeViewModel>();
         List<CompanyViewModel> CompaniesResult = new List<CompanyViewModel>();
         public HomeController(CompanyService companyService)
         {
@@ -35,6 +37,24 @@ namespace UI.Controllers
                     CompaniesResult.Add(companyView);
                 }
             }
+            if(employeeService==null)
+            {
+                employeeService = new EmployeeService();
+                List<EmployeeDTO> EmployeesDTO = new List<EmployeeDTO>();
+                EmployeesDTO = employeeService.GetAllEmployee();
+                foreach (var employee in EmployeesDTO)
+                {
+                    EmployeeViewModel employeeView = new EmployeeViewModel();
+                    employeeView.Id = employee.Id;
+                    employeeView.Name= employee.Name;
+                    employeeView.Surname = employee.Surname;
+                    employeeView.Middlename = employee.Middlename;
+                    employeeView.Position = employee.Position;
+                    employeeView.EmploymentDate= employee.EmploymentDate;
+                    employeeView.Company = employee.Company;
+                    EmployeesResult.Add(employeeView);
+                }
+            }
         }
         public ActionResult Index()
         {
@@ -54,6 +74,7 @@ namespace UI.Controllers
 
             return View();
         }
+        #region CompanyLogic
         public ActionResult Companies()
         {
             //CompanyService companyService = new CompanyService();
@@ -137,5 +158,17 @@ namespace UI.Controllers
             
             
         }
+        #endregion
+
+        #region EmployeeLogic
+        public ActionResult Employees()
+        {
+            //CompanyService companyService = new CompanyService();
+            //List<CompanyDTO> CompaniesDTO = new companyService.GetAllCompany();
+
+
+            return View(EmployeesResult);
+        }
+        #endregion
     }
 }

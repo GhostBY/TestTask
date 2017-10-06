@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace BLL.DTO
+namespace UI.Models.ViewModels
 {
-    public class EmployeeDTO
+    public class EmployeeViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,6 +13,6 @@ namespace BLL.DTO
         public string Middlename { get; set; }
         public DateTime EmploymentDate { get; set; }
         public string Position { get; set; }
-        public string Company{ get; set; }
+        public string Company { get; set; }
     }
 }

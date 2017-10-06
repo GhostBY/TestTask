@@ -1,0 +1,72 @@
+﻿
+@model List<UI.Models.ViewModels.EmployeeViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <title>Companies</title>
+</head>
+<body>
+    <div>
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success">@TempData["message"]</div>
+        }
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Список компаний</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-condensed table-bordered">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th>Имя</th>
+                    <th class="text-center">Фамилия </th>
+                    <th class="text-center">Отчество</th>
+                    <th class="text-center">Должность</th>
+                    <th class="text-center">Дата приема</th>
+                    <th class="text-center">Компания</th>
+                </tr>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td class="text-right">@item.Id</td>
+                       
+                        <td class="text-center">@item.Name</td>
+                        <td class="ttext-center">@item.Surname</td>
+                        <td class="text-center">@item.Middlename </td>
+                        <td class="text-center">@item.Position</td>
+                        <td class="text-center">@item.EmploymentDate</td>
+                        <td class="text-center">@item.Company</td>
+                        <td class="text-center">
+                            @using (Html.BeginForm("DeleteCompany", "Home"))
+                            {
+                                @Html.Hidden("Id", item.Id)
+                                <input type="submit"
+                                       class="btn btn-default btn-xs"
+                                       value="Удалить" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="panel-footer">
+            @Html.ActionLink("Добавить работника", "CompanyCreate", null,
+            new { @class = "btn btn-default" })
+        </div>
+    </div>
+</body>
+</html>
+
+
+
