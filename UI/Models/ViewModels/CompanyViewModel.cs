@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace DAL.Entities
+namespace UI.Models.ViewModels
 {
-    public class Company
+    public class CompanyViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

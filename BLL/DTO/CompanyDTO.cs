@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Entities
+namespace BLL.DTO
 {
-    public class Company
+    public class CompanyDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
