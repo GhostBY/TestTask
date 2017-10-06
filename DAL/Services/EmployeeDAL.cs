@@ -24,7 +24,11 @@ namespace DAL.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            string query = "DELETE FROM Employees WHERE Id = @Id; ";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@Id", SqlDbType.Int);
+            sqlParameters[0].Value = Convert.ToInt16(id);
+            Connection.ExecuteDeleteQuery(query, sqlParameters);
         }
 
         public Employee Get(int id)

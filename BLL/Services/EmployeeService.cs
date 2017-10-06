@@ -27,7 +27,7 @@ namespace BLL.Services
 
         public void DeleteEmployee(int Id)
         {
-            throw new NotImplementedException();
+            employeeDAL.Delete(Id);
         }
 
         public List<EmployeeDTO> GetAllEmployee()

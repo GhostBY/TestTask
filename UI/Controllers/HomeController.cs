@@ -169,6 +169,20 @@ namespace UI.Controllers
 
             return View(EmployeesResult);
         }
+        public ActionResult DeleteEmployee(int Id)
+        {
+            try
+            {
+                employeeService.DeleteEmployee(Id);
+                TempData["message"] = string.Format("Сотрудник был успешно удален");
+                return RedirectToAction("Employees");
+            }
+            catch
+            {
+                TempData["message"] = string.Format("Возникла ошибка при удалении сотрудника");
+                return RedirectToAction("Employees");
+            }
+        }
         #endregion
     }
 }

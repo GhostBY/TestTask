@@ -48,7 +48,7 @@
                         <td class="text-center">@item.EmploymentDate</td>
                         <td class="text-center">@item.Company</td>
                         <td class="text-center">
-                            @using (Html.BeginForm("DeleteCompany", "Home"))
+                            @using (Html.BeginForm("DeleteEmployee", "Home"))
                             {
                                 @Html.Hidden("Id", item.Id)
                                 <input type="submit"
