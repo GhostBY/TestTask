@@ -18,7 +18,7 @@ namespace DAL
         {
             Adapter = new SqlDataAdapter();
             Connection = new SqlConnection(ConfigurationManager.ConnectionStrings
-                    ["DefaultConnection"].ConnectionString);
+                    ["LocalConnection"].ConnectionString);
         }
         private SqlConnection OpenConnection()
         {

@@ -54,7 +54,7 @@
                                 <label>@(property.DisplayName ?? property.PropertyName)</label>
 
                                 <div class="form-group">
-                                    <input type="date" class="form-control" id="EmploymentDate" name="EmploymentDate" placeholder="Дата" required>
+                                    <input type="date" class="form-control" id="EmploymentDate" name="EmploymentDate" value="@Model.EmploymentDate.ToShortDateString();" required>
                                 </div>
                             </div>
                         }
