@@ -1,7 +1,7 @@
 ﻿
 @model List<UI.Models.ViewModels.EmployeeViewModel>
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -54,6 +54,15 @@
                                 <input type="submit"
                                        class="btn btn-default btn-xs"
                                        value="Удалить" />
+                            }
+                        </td>
+                        <td class="text-center">
+                            @using (Html.BeginForm("EmployeeEdit", "Home",FormMethod.Get))
+                            {
+                                @Html.Hidden("Id", item.Id)
+                                <input type="submit"
+                                       class="btn btn-default btn-xs"
+                                       value="Изменить" />
                             }
                         </td>
                     </tr>

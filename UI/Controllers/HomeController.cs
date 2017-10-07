@@ -205,14 +205,69 @@ namespace UI.Controllers
 
                 employeeService.CreateEmployee(employeeDTO);
 
-                TempData["message"] = string.Format("Компания  успешно добавлена");
+                TempData["message"] = string.Format("Сотрудник успешно добавлен");
                 return RedirectToAction("Employees");
             }
             else
             {
                 return View(item);
             }
-            return View();
+            
+        }
+
+        public ActionResult EmployeeEdit(int Id)
+        {
+            EmployeeViewModel employee = new EmployeeViewModel();
+
+            EmployeeDTO employeeDTO = employeeService.GetEmployeeById(Id);
+            if (employeeDTO != null)
+            {
+                employee.Id = employeeDTO.Id;
+                employee.Name = employeeDTO.Name;
+                employee.Surname = employeeDTO.Surname;
+                employee.Middlename = employeeDTO.Middlename;
+                employee.Position = employeeDTO.Position;
+                employee.Company = employeeDTO.Company;
+                employee.EmploymentDate = employeeDTO.EmploymentDate;
+            }
+
+            int CompanyId = new int();
+            foreach (var company in CompaniesResult)
+            {
+                if (employee.Company == company.Name)
+                {
+                    CompanyId = company.Id;
+                }
+
+               
+            }
+            ViewBag.Companies = CompaniesResult;
+            ViewBag.CompanyId = CompanyId;
+            return View(employee);
+        }
+        [HttpPost]
+        public ActionResult EmployeeEdit(EmployeeViewModel item)
+        {
+            if (ModelState.IsValid)
+            {
+                EmployeeDTO employeeDTO = new EmployeeDTO();
+                employeeDTO.Id = item.Id;
+                employeeDTO.Name = item.Name;
+                employeeDTO.Surname = item.Surname;
+                employeeDTO.Middlename = item.Middlename;
+                employeeDTO.EmploymentDate = item.EmploymentDate;
+                employeeDTO.Position = item.Position;
+                employeeDTO.Company = item.Company;
+
+                employeeService.UpdateEmployee(employeeDTO);
+
+                TempData["message"] = string.Format("Сотрудник успешно обнавлен");
+                return RedirectToAction("Employees");
+            }
+            else
+            {
+                return View(item);
+            }
         }
         #endregion
     }

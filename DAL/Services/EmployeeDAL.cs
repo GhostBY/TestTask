@@ -47,7 +47,27 @@ namespace DAL.Services
 
         public Employee Get(int id)
         {
-            throw new NotImplementedException();
+            string query = @"SELECT        dbo.Employees.Id, dbo.Employees.Name, dbo.Employees.Surname, dbo.Employees.Middlename, dbo.Employees.EmploymentDate, dbo.Employees.Position, dbo.Companies.Name AS CompanyName
+                             FROM            dbo.Employees INNER JOIN
+                             dbo.Companies ON dbo.Employees.CompanyId = dbo.Companies.Id
+                             WHERE        (dbo.Employees.Id = @Id)";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@Id", SqlDbType.VarChar);
+            sqlParameters[0].Value = Convert.ToString(id);
+            DataTable data = Connection.ExecuteSelectQuery(query, sqlParameters);
+            Employee employee = new Employee();
+            foreach (DataRow dr in data.Rows)
+            {
+                employee.Id = Int32.Parse(dr["Id"].ToString());
+                employee.Name = dr["Name"].ToString();
+                employee.Surname = dr["Surname"].ToString();
+                employee.Middlename = dr["Middlename"].ToString();
+                employee.Position= dr["Position"].ToString();
+                employee.Company = dr["Companyname"].ToString();
+                employee.EmploymentDate = Convert.ToDateTime(dr["EmploymentDate"].ToString());
+                
+            }
+            return employee;
         }
 
         public List<Employee> GetAll()
@@ -76,7 +96,24 @@ namespace DAL.Services
 
         public void Update(Employee item)
         {
-            throw new NotImplementedException();
+            //string query = "INSERT INTO Employees(Name, Surname, Middlename, EmploymentDate,Position,CompanyId) VALUES(@Name, @Surname, @Middlename, @EmploymentDate,@Position,@CompanyId); ";
+            string query = "UPDATE Employees SET Name=@Name, Surname=@Surname, Middlename=@Middlename, EmploymentDate=@EmploymentDate,Position=@Position,CompanyId=@CompanyId WHERE Id = @Id; ";
+            SqlParameter[] sqlParameters = new SqlParameter[7];
+            sqlParameters[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlParameters[0].Value = Convert.ToString(item.Name);
+            sqlParameters[1] = new SqlParameter("@Surname", SqlDbType.NVarChar);
+            sqlParameters[1].Value = Convert.ToString(item.Surname);
+            sqlParameters[2] = new SqlParameter("@Middlename", SqlDbType.NVarChar);
+            sqlParameters[2].Value = Convert.ToString(item.Middlename);
+            sqlParameters[3] = new SqlParameter("@EmploymentDate", SqlDbType.Date);
+            sqlParameters[3].Value = Convert.ToString(item.EmploymentDate);
+            sqlParameters[4] = new SqlParameter("@Position", SqlDbType.NVarChar);
+            sqlParameters[4].Value = Convert.ToString(item.Position);
+            sqlParameters[5] = new SqlParameter("@CompanyId", SqlDbType.Int);
+            sqlParameters[5].Value = Convert.ToInt16(item.Company);
+            sqlParameters[6] = new SqlParameter("@Id", SqlDbType.Int);
+            sqlParameters[6].Value = Convert.ToInt16(item.Id);
+            Connection.ExecuteUpdateQuery(query, sqlParameters);
         }
     }
 }

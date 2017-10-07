@@ -60,12 +60,30 @@ namespace BLL.Services
 
         public EmployeeDTO GetEmployeeById(int Id)
         {
-            throw new NotImplementedException();
+            Employee employee = new Employee();
+            employee = employeeDAL.Get(Id);
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.Id = employee.Id;
+            employeeDTO.Name = employee.Name;
+            employeeDTO.Surname = employee.Surname;
+            employeeDTO.Middlename = employee.Middlename;
+            employeeDTO.EmploymentDate = employee.EmploymentDate;
+            employeeDTO.Position= employee.Position;
+            employeeDTO.Company = employee.Company;
+            return employeeDTO;
         }
 
         public void UpdateEmployee(EmployeeDTO Employee)
         {
-            throw new NotImplementedException();
+            Employee employee = new Employee();
+            employee.Id = Employee.Id;
+            employee.Name = Employee.Name;
+            employee.Surname = Employee.Surname;
+            employee.Middlename = Employee.Middlename;
+            employee.EmploymentDate = Employee.EmploymentDate;
+            employee.Position = Employee.Position;
+            employee.Company = Employee.Company;
+            employeeDAL.Update(employee);
         }
     }
 }

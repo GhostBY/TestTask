@@ -18,10 +18,10 @@
 <body>
     <div class="panel">
         <div class="panel-heading">
-            <h3>Добавление сотрудника</h3>
+            <h3>Изменение сотрудника</h3>
         </div>
 
-        @using (Html.BeginForm("EmployeeCreate", "Home"))
+        @using (Html.BeginForm("EmployeeEdit", "Home"))
         {
             <div class="panel-body">
                 @Html.HiddenFor(m => m.Id)
@@ -36,13 +36,13 @@
 
                                 <div class="form-group">
                                     <div class="col-xs-12 selectContainer">
-                                        <select class="form-control" name="Company" id="Company">
-                                            <option value="">Choose a company</option>
+                                        <select class="form-control" name="Company" id="Company" >
+                                            <option value="@ViewBag.CompanyId">@Model.Company</option>
                                             @foreach (var Com in @ViewBag.Companies)
                                             {
                                                 <option value="@Com.Id" name="Company" id="Company">@Com.Name</option>
                                             }
-                                            
+
                                         </select>
                                     </div>
                                 </div>
@@ -84,6 +84,7 @@
     </div>
 </body>
 </html>
+
 
 
 
