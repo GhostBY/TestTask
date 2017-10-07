@@ -22,7 +22,15 @@ namespace BLL.Services
 
         public void CreateEmployee(EmployeeDTO Employee)
         {
-            throw new NotImplementedException();
+            Employee employee = new Employee();
+            employee.Id = Employee.Id;
+            employee.Name = Employee.Name;
+            employee.Surname = Employee.Surname;
+            employee.Middlename = Employee.Middlename;
+            employee.EmploymentDate = Employee.EmploymentDate;
+            employee.Position = Employee.Position;
+            employee.Company = Employee.Company;
+            employeeDAL.Create(employee);
         }
 
         public void DeleteEmployee(int Id)

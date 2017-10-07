@@ -19,7 +19,21 @@ namespace DAL.Services
         }
         public void Create(Employee item)
         {
-            throw new NotImplementedException();
+            string query = "INSERT INTO Employees(Name, Surname, Middlename, EmploymentDate,Position,CompanyId) VALUES(@Name, @Surname, @Middlename, @EmploymentDate,@Position,@CompanyId); ";
+            SqlParameter[] sqlParameters = new SqlParameter[6];
+            sqlParameters[0] = new SqlParameter("@Name", SqlDbType.NVarChar);
+            sqlParameters[0].Value = Convert.ToString(item.Name);
+            sqlParameters[1] = new SqlParameter("@Surname", SqlDbType.NVarChar);
+            sqlParameters[1].Value = Convert.ToString(item.Surname);
+            sqlParameters[2] = new SqlParameter("@Middlename", SqlDbType.NVarChar);
+            sqlParameters[2].Value = Convert.ToString(item.Middlename);
+            sqlParameters[3] = new SqlParameter("@EmploymentDate", SqlDbType.Date);
+            sqlParameters[3].Value = Convert.ToString(item.EmploymentDate);
+            sqlParameters[4] = new SqlParameter("@Position", SqlDbType.NVarChar);
+            sqlParameters[4].Value = Convert.ToString(item.Position);
+            sqlParameters[5] = new SqlParameter("@CompanyId", SqlDbType.Int);
+            sqlParameters[5].Value = Convert.ToInt16(item.Company);
+            Connection.ExecuteInsertQuery(query, sqlParameters);
         }
 
         public void Delete(int id)
@@ -38,7 +52,7 @@ namespace DAL.Services
 
         public List<Employee> GetAll()
         {
-            string query = string.Format(@"SELECT        dbo.Employees.Name, dbo.Employees.Surname, dbo.Employees.Middlename, dbo.Employees.EmploymentDate, dbo.Employees.Position, dbo.Companies.Name AS CompanyName, dbo.Companies.Id
+            string query = string.Format(@"SELECT        dbo.Employees.Id, dbo.Employees.Name, dbo.Employees.Surname, dbo.Employees.Middlename, dbo.Employees.EmploymentDate, dbo.Employees.Position, dbo.Companies.Name AS CompanyName
                                            FROM            dbo.Employees INNER JOIN
                                            dbo.Companies ON dbo.Employees.CompanyId = dbo.Companies.Id");
             SqlParameter[] sqlParameters = new SqlParameter[0];

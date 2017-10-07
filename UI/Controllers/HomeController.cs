@@ -183,6 +183,37 @@ namespace UI.Controllers
                 return RedirectToAction("Employees");
             }
         }
+
+        public ActionResult EmployeeCreate()
+        {
+         ViewBag.Companies = CompaniesResult;
+            return View(new EmployeeViewModel());
+        }
+        [HttpPost]
+        public ActionResult EmployeeCreate(EmployeeViewModel item)
+        {
+            if (ModelState.IsValid)
+            {
+                EmployeeDTO employeeDTO = new EmployeeDTO();
+                employeeDTO.Id = item.Id;
+                employeeDTO.Name = item.Name;
+                employeeDTO.Surname = item.Surname;
+                employeeDTO.Middlename = item.Middlename;
+                employeeDTO.EmploymentDate = item.EmploymentDate;
+                employeeDTO.Position = item.Position;
+                employeeDTO.Company = item.Company;
+
+                employeeService.CreateEmployee(employeeDTO);
+
+                TempData["message"] = string.Format("Компания  успешно добавлена");
+                return RedirectToAction("Employees");
+            }
+            else
+            {
+                return View(item);
+            }
+            return View();
+        }
         #endregion
     }
 }

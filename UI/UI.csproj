@@ -193,6 +193,7 @@
     <Content Include="Views\Home\CompanyEdit.cshtml" />
     <Content Include="Views\Home\CompanyCreate.cshtml" />
     <Content Include="Views\Home\Employees.cshtml" />
+    <Content Include="Views\Home\EmployeeCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
